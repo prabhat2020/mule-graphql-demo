@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="9335e298-3bb8-45d1-8e67-199dc737212f" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="accounts-rest-apiFlow" doc:id="dbae5ae5-96d0-4f4e-b4aa-ff4bd9858b3d" >
+		<http:listener doc:name="Listener" doc:id="eb0a8077-589c-4bcb-a462-31e3f95cb61c" config-ref="HTTP_Listener_config" path="/accounts/{accountId}"/>
+		<file:read doc:name="Read" doc:id="292e0245-afe0-48eb-b5ea-fc194efac18a" path="C:\AnypointStudio\Handson\mule-graphql-demo\src\main\resources\accounts.json"/>
+	</flow>
+	<flow name="accounts-rest-apiFlow1" doc:id="7942a997-daaf-4392-a498-6f6a04da3c3a" >
+		<http:listener doc:name="Listener" doc:id="08a51afb-febe-4813-9a2b-4d6e04b3444e" config-ref="HTTP_Listener_config" path="/accounts/{accountId}/balances"/>
+		<file:read doc:name="Read" doc:id="97502d69-ac6f-403b-9da5-505df36d0729" path="C:\AnypointStudio\Handson\mule-graphql-demo\src\main\resources\balances.json"/>
+	</flow>
+	<flow name="accounts-rest-apiFlow2" doc:id="938529e7-4322-4e5e-88b0-0828c563a660" >
+		<http:listener doc:name="Listener" doc:id="dcbd91cb-3383-4a4d-aab1-13de60249378" config-ref="HTTP_Listener_config" path="/accounts/{accountId}/transactions"/>
+		<file:read doc:name="Read" doc:id="0b1168eb-44f2-4877-ab09-e596408670da" path="C:\AnypointStudio\Handson\mule-graphql-demo\src\main\resources\transaction.json"/>
+	</flow>
+</mule>
